@@ -3,15 +3,13 @@ TA_UUID := 1987f328-1755-9321-5441-43494343544c
 TA_SUFFIX := .ta
 
 $(warning PLATFORM_TDK_VERSION:$(PLATFORM_TDK_VERSION))
-ifeq ($(PLATFORM_TDK_VERSION), 38)
-    PLATFORM_TDK_PATH := $(BOARD_AML_VENDOR_PATH)/tdk_v3
+ifneq ($(filter $(PLATFORM_TDK_VERSION), 38 318),)
     ifeq ($(BOARD_AML_SOC_TYPE),)
         LOCAL_TA := v3/signed/$(TA_UUID)$(TA_SUFFIX)
     else
         LOCAL_TA := v3/dev/$(BOARD_AML_SOC_TYPE)/$(TA_UUID)$(TA_SUFFIX)
     endif
 else
-    PLATFORM_TDK_PATH := $(BOARD_AML_VENDOR_PATH)/tdk
     LOCAL_TA := v2/signed/$(TA_UUID)$(TA_SUFFIX)
 endif
 
